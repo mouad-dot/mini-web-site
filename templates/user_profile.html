@@ -1,0 +1,47 @@
+<!-- filepath: /c:/Users/EMI/OneDrive/Bureau/mon_projet_django/projet/templates/user_profile.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Création d'un compte</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/sign.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="{% static 'image/th.jpeg' %}" alt="User Icon">
+            <h1>Création d'un compte</h1>
+        </div>
+        <div class="selection-buttons">
+            <form method="post" action="{% url 'register' %}" class="form-horizontal">
+                {% csrf_token %}
+                <label for="user_type">Type d'utilisateur :</label>
+                <select name="user_type" id="user_type" onchange="this.form.submit()">
+                    <option value="student" {% if user_type == 'student' %}selected{% endif %}>Étudiant</option>
+                    <option value="employee" {% if user_type == 'employee' %}selected{% endif %}>Employé</option>
+                </select>
+            </form>
+        </div>
+        <!-- Affichage du formulaire correspondant au type d'utilisateur sélectionné -->
+        {% if user_type == 'student' %}
+            <form method="post" action="{% url 'register' %}" class="form-horizontal">
+                {% csrf_token %}
+                {{ student_form.as_p }}
+                <input type="hidden" name="user_type" value="student">
+                <p>
+                    <input type="submit" name="submit_form" value="Créer un compte" />
+                </p>
+            </form>
+        {% elif user_type == 'employee' %}
+            <form method="post" action="{% url 'register' %}" class="form-horizontal">
+                {% csrf_token %}
+                {{ employee_form.as_p }}
+                <input type="hidden" name="user_type" value="employee">
+                <p>
+                    <input type="submit" name="submit_form" value="Créer un compte" />
+                </p>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>

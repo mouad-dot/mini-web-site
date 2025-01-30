@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bienvenue.css' %}">
+</head>
+<body>
+    <header>
+        {% load static %}
+        <img src="{% static 'image/logo.jpeg' %}" alt="Logo">
+        <div class="user-info">
+            <h1>{{ user.full_name }}</h1>
+            <p>
+                {% if user_type == 'student' %}
+                    {{ extra_info }}
+                {% else %}
+                    Office: {{ extra_info }}
+                {% endif %}
+            </p>
+        </div>
+        <div class="links">
+            <a href="/modifier-profil">Modifier le profil</a>
+            <a href="/voir-profil">Voir le profil</a>
+            <a href="/logout">Déconnexion</a>
+        </div>
+    </header>
+    <div class="container">
+        <!-- Colonne gauche : Publication et vos messages -->
+        <div class="left">
+            <!-- Formulaire pour publier un message -->
+            <div class="form-group">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <label for="message">Publier un message :</label>
+                    <input type="text" id="message" name="message" placeholder="Écrire un message..." required>
+                    <button type="submit" name="publish_message">Publier</button>
+                </form>
+            </div>
+    
+            <!-- Liste des messages publiés par l'utilisateur -->
+            <div class="messages">
+                <h2>Vos messages :</h2>
+                <ul>
+                    {% for message in user_messages %}
+                        <li>{{ message.contenu }} ({{ message.date_publication|date:"d/m/Y H:i" }})</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    
+        <!-- Colonne droite : Messages des amis et amis récents -->
+        <div class="right">
+            <!-- Messages des amis -->
+            <div class="messages">
+                <h2>Messages des amis :</h2>
+                <ul>
+                    {% for msg in messages_amis %}
+                        <li>
+                            {{ msg.contenu }} (Publié par 
+                            {% if msg.student %}
+                                {{ msg.student.first_name }} {{ msg.student.last_name }}
+                            {% else %}
+                                {{ msg.employee.first_name }} {{ msg.employee.last_name }}
+                            {% endif %}
+                            )
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            
+    
+            <!-- Liste des amis -->
+            <div class="friends">
+                <h2>Mes derniers amis :</h2>
+                <ul>
+                    {% for friend in user_friends %}
+                        <li>{{ friend.first_name }} {{ friend.last_name }} (Ajouté le {{ friend.added_at|date:"d/m/Y H:i" }})</li>
+                    {% endfor %}
+                </ul>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <label for="friend_email">Ajouter un ami :</label>
+                    <input type="email" id="friend_email" name="friend_name" placeholder="Email de l'ami..." required>
+                    <button type="submit" name="add_friend">Ajouter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+</html>

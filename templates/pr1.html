@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" >
+    <title>Login Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'C:\Users\EMI\OneDrive\Bureau\mon_projet_django\projet\mon_projet\static\css\style.css' %}">
+</head> 
+<body>
+    <div class="salam"> 
+        <div class="ahlan">
+            <img src="{% static 'image/th.jpeg' %}" alt="User Icon"> 
+            <h1>Connexion</h1>
+        </div>
+        <form action="/welcome/" method="post">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="error">{{ form.non_field_errors }}</div>
+            {% endif %}
+            <div class="form-group">
+                <label for="id_email" class="email-label">Email</label>
+                <input type="text" name="email" id="id_email" class="form-control email-input">
+                {% if form.email.errors %}
+                    <div class="error">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_password" class="password-label">Mot de passe</label>
+                <input type="password" name="password" id="id_password" class="form-control password-input">
+                {% if form.password.errors %}
+                    <div class="error">{{ form.password.errors }}</div>
+                {% endif %}
+            </div>
+            <p>
+                <button type="submit" value="Se connecter">Se connecter</button>
+                <a href="{% url 'register' %}">Créer un compte</a>
+            </p>
+        </form>
+    </div>
+</body>
+</html>

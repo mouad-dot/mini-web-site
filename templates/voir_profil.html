@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voir le Profil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/voir_profile.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Votre Profil</h1>
+        <div class="info">
+            <span>Nom :</span> {{ user.first_name }} {{ user.last_name }}
+        </div>
+        <div class="info">
+            <span>Email :</span> {{ user.email }}
+        </div>
+        <div class="info">
+            <span>Téléphone :</span> {{ user.tlfn }}
+        </div>
+
+        <!-- Informations spécifiques au type d'utilisateur -->
+        {% if user_type == 'student' %}
+            <div class="info">
+                <span>Cursus :</span> {{ user.cursus }}
+            </div>
+            <div class="info">
+                <span>Année :</span> {{ user.annee }}
+            </div>
+        {% elif user_type == 'employee' %}
+            <div class="info">
+                <span>Office :</span> {{ user.office }}
+            </div>
+            <div class="info">
+                <span>Campus :</span> {{ user.campus }}
+            </div>
+            <div class="info">
+                <span>Job :</span> {{ user.job }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+body {
+    font-family: Georgia, serif;
+    margin: 0;
+    padding: 0;
+    background: url("../image/back.png") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Alignement vertical au centre */
+    height: 100vh;
+    flex-direction: column;
+}
+
+header {
+    width: 100%;
+    background-color: black; /* Couleur de fond noire pour le header */
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-bottom: 5px solid black;
+}
+
+header img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+header .user-info {
+    flex-grow: 1;
+    text-align: center;
+}
+
+header .links a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.container {
+    width: 90%; /* Augmenter la largeur de la division */
+    max-width: 1400px; /* Augmenter la largeur maximale de la division */
+    background: white;
+    border: 5px solid black;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 100px auto; /* Centrer horizontalement et ajouter une marge supérieure pour compenser le header fixe */
+    display: flex;
+    justify-content: space-between;
+}
+
+.left, .right {
+    width: 48%;
+}
+
+.messages, .friends {
+    margin-top: 20px;
+}
+
+.messages h2, .friends h2 {
+    color: #0056b3;
+}
+
+.messages ul, .friends ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.messages li, .friends li {
+    background-color: #e9ecef;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}

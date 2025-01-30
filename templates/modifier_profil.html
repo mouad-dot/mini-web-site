@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier le Profil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/modifier_profile.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Modifier le Profil</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Enregistrer les modifications</button>
+        </form>
+    </div>
+</body>
+</html>
